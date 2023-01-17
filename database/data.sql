@@ -14,20 +14,19 @@ INSERT INTO status_ref (status_name,status_value) VALUES ('Canceled',-5);
 INSERT INTO status_ref (status_name,status_value) VALUES ('Open',0);
 INSERT INTO status_ref (status_name,status_value) VALUES ('Closed',15);
 
-INSERT INTO auction_duration (min_price, max_price,modified_date) VALUES (40000.00, 100000.00,'2022-10-10');
-INSERT INTO auction_duration (min_price, max_price,modified_date) VALUES (43000.00, 100000.00,'2022-10-12');
+-- INSERT INTO auction_duration (min_duration, max_duration,modified_date) VALUES (12,72,'2022-10-10');
 
-INSERT INTO auction_commission (commission_rate,modified_date) VALUES (5,'2022-10-10');
-INSERT INTO auction_commission (commission_rate,modified_date) VALUES (10)'2022-10-12';
-INSERT INTO auction_commission (commission_rate,modified_date) VALUES (15,'2023-01-01');
+-- INSERT INTO auction_commission (commission_rate,modified_date) VALUES (5,'2022-10-10');
+-- INSERT INTO auction_commission (commission_rate,modified_date) VALUES (10)'2022-10-12';
+-- INSERT INTO auction_commission (commission_rate,modified_date) VALUES (15,'2023-01-01');
 
 INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id, status_ref_id) VALUES ('Laptop', 'Used laptop in good condition', 250.00, NOW(), 24, 1, 1, 1);
 INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id, status_ref_id) VALUES ('Sofa', 'Brand new sofa with warranty', 500.00, NOW(), 48, 2, 2, 1);
 INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id, status_ref_id) VALUES ('Shirt', 'Designer shirt', 50.00, NOW(), 12, 3, 3, 1);
 
-INSERT INTO auction_image (image_url, auction_id) VALUES ('https://example.com/laptop.jpg', 1);
-INSERT INTO auction_image (image_url, auction_id) VALUES ('https://example.com/sofa.jpg', 2);
-INSERT INTO auction_image (image_url, auction_id) VALUES ('https://example.com/shirt.jpg', 3);
+-- INSERT INTO auction_image (image_url, auction_id) VALUES ('https://example.com/laptop.jpg', 1);
+-- INSERT INTO auction_image (image_url, auction_id) VALUES ('https://example.com/sofa.jpg', 2);
+-- INSERT INTO auction_image (image_url, auction_id) VALUES ('https://example.com/shirt.jpg', 3);
 
 INSERT INTO auction_bid (user_account_id, auction_id, bid_amount) VALUES (1, 1, 300.00);
 INSERT INTO auction_bid (user_account_id, auction_id, bid_amount) VALUES (2, 2, 550.00);

@@ -37,19 +37,19 @@ CREATE TABLE status_ref(
   status_value smallint UNIQUE not null
 );
 
-CREATE TABLE auction_duration(
-  id SERIAL PRIMARY KEY,
-  min_duration smallint not null check(min_duration>=0),
-  max_duration smallint check(max_duration>=min_duration),
-  modified_date date not null default CURRENT_DATE
+-- CREATE TABLE auction_duration(
+--   id SERIAL PRIMARY KEY,
+--   min_duration smallint not null check(min_duration>=0),
+--   max_duration smallint check(max_duration>=min_duration),
+--   modified_date date not null default CURRENT_DATE
 
-);
+-- );
 
-CREATE TABLE auction_commission(
-  id SERIAL PRIMARY KEY,
-  commission_rate smallint not null check(commission_rate>=0),
-  modified_date date not null default CURRENT_DATE
-);
+-- CREATE TABLE auction_commission(
+--   id SERIAL PRIMARY KEY,
+--   commission_rate smallint not null check(commission_rate>=0),
+--   modified_date date not null default CURRENT_DATE
+-- );
 
 -- duration: heure
 CREATE TABLE auction(
@@ -65,11 +65,11 @@ CREATE TABLE auction(
 
 );
 
-CREATE TABLE auction_image(
-    id SERIAL PRIMARY KEY,
-    image_url TEXT not null,
-    auction_id INTEGER REFERENCES auction(id) not null
-);
+-- CREATE TABLE auction_image(
+--     id SERIAL PRIMARY KEY,
+--     image_url TEXT not null,
+--     auction_id INTEGER REFERENCES auction(id) not null
+-- );
 
 CREATE TABLE auction_bid(
     id SERIAL PRIMARY KEY,
