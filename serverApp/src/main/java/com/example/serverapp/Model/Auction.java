@@ -28,7 +28,9 @@ public class Auction {
     @JoinColumn(name = "user_account_id")
     User_account user_account;
 
-    int status_ref_id;
+    @OneToOne
+    @JoinColumn(name = "status_ref_id",referencedColumnName = "id")
+     Status_ref status_ref;
 
     public String getTitle() {
         return title;
@@ -86,12 +88,12 @@ public class Auction {
         this.user_account = user_account;
     }
 
-    public int getStatus_ref_id() {
-        return status_ref_id;
+    public Status_ref getStatus_ref() {
+        return status_ref;
     }
 
-    public void setStatus_ref_id(int status_ref_id) {
-        this.status_ref_id = status_ref_id;
+    public void setStatus_ref(Status_ref status_ref) {
+        this.status_ref = status_ref;
     }
 
     public void setId(Long id) {
