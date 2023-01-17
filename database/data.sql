@@ -31,3 +31,5 @@ INSERT INTO auction (title, description, min_price, start_date, duration, catego
 INSERT INTO auction_bid (user_account_id, auction_id, bid_amount) VALUES (1, 1, 300.00);
 INSERT INTO auction_bid (user_account_id, auction_id, bid_amount) VALUES (2, 2, 550.00);
 INSERT INTO auction_bid (user_account_id, auction_id, bid_amount) VALUES (3, 3, 75.00);
+
+
