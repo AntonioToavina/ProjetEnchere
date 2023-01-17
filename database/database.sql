@@ -8,7 +8,7 @@ CREATE TABLE user_account (
   id SERIAL PRIMARY KEY,
   userkey VARCHAR(80) UNIQUE NOT NULL default('#u'||nextval('seq_user_accountkey')) ,
   username VARCHAR(80) NOT NULL,
-  email VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL
 );
 
@@ -37,19 +37,19 @@ CREATE TABLE status_ref(
   status_value smallint UNIQUE not null
 );
 
-CREATE TABLE auction_duration(
-  id SERIAL PRIMARY KEY,
-  min_duration smallint not null check(min_duration>=0),
-  max_duration smallint check(max_duration>=min_duration),
-  modified_date date not null default CURRENT_DATE
+-- CREATE TABLE auction_duration(
+--   id SERIAL PRIMARY KEY,
+--   min_duration smallint not null check(min_duration>=0),
+--   max_duration smallint check(max_duration>=min_duration),
+--   modified_date date not null default CURRENT_DATE
 
-);
+-- );
 
-CREATE TABLE auction_commission(
-  id SERIAL PRIMARY KEY,
-  commission_rate smallint not null check(commission_rate>=0),
-  modified_date date not null default CURRENT_DATE
-);
+-- CREATE TABLE auction_commission(
+--   id SERIAL PRIMARY KEY,
+--   commission_rate smallint not null check(commission_rate>=0),
+--   modified_date date not null default CURRENT_DATE
+-- );
 
 -- duration: heure
 CREATE TABLE auction(
@@ -65,11 +65,11 @@ CREATE TABLE auction(
 
 );
 
-CREATE TABLE auction_image(
-    id SERIAL PRIMARY KEY,
-    image_url TEXT not null,
-    auction_id INTEGER REFERENCES auction(id) not null
-);
+-- CREATE TABLE auction_image(
+--     id SERIAL PRIMARY KEY,
+--     image_url TEXT not null,
+--     auction_id INTEGER REFERENCES auction(id) not null
+-- );
 
 CREATE TABLE auction_bid(
     id SERIAL PRIMARY KEY,
@@ -79,3 +79,27 @@ CREATE TABLE auction_bid(
     bid_date TIMESTAMP default CURRENT_TIMESTAMP
 
 );
+
+
+CREATE SEQUENCE seq_adminkey;
+
+CREATE TABLE admin (
+  id SERIAL PRIMARY KEY,
+  adminkey VARCHAR(80) UNIQUE NOT NULL default('#ad'||nextval('seq_adminkey')) ,
+  firstname VARCHAR(80) ,
+  lastname VARCHAR(80) ,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL
+
+);
+-- status
+-- 5 valid
+-- -5 canceled
+
+CREATE TABLE account_recharge_validation(
+  id SERIAL PRIMARY KEY,
+  account_recharge_id INTEGER REFERENCES account_recharge(id) UNIQUE not null,
+  admin_id INTEGER REFERENCES admin(id) UNIQUE not null,
+  status smallint not null default 5
+);
+
