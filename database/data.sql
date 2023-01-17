@@ -14,8 +14,7 @@ INSERT INTO status_ref (status_name,status_value) VALUES ('Canceled',-5);
 INSERT INTO status_ref (status_name,status_value) VALUES ('Open',0);
 INSERT INTO status_ref (status_name,status_value) VALUES ('Closed',15);
 
-INSERT INTO auction_duration (min_price, max_price,modified_date) VALUES (40000.00, 100000.00,'2022-10-10');
-INSERT INTO auction_duration (min_price, max_price,modified_date) VALUES (43000.00, 100000.00,'2022-10-12');
+INSERT INTO auction_duration (min_duration, max_duration,modified_date) VALUES (12, 72,'2022-10-10');
 
 INSERT INTO auction_commission (commission_rate,modified_date) VALUES (5,'2022-10-10');
 INSERT INTO auction_commission (commission_rate,modified_date) VALUES (10)'2022-10-12';
