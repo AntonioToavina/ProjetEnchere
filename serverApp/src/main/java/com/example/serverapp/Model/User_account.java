@@ -1,7 +1,10 @@
 package com.example.serverapp.Model;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 
+@DynamicInsert
 @Entity
 @Table(name = "user_account")
 public class User_account {
@@ -55,5 +58,16 @@ public class User_account {
 
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "User_account{" +
+                "id=" + id +
+                ", userkey='" + userkey + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
