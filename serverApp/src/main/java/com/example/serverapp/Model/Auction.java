@@ -34,19 +34,8 @@ public class Auction {
 
     @OneToOne
     @JoinColumn(name = "status_ref_id",referencedColumnName = "id")
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-     Status_ref status_ref;
-=======
+    
     Status_ref status_ref;
->>>>>>> Stashed changes
-=======
-    Status_ref status_ref;
->>>>>>> Stashed changes
-=======
-    Status_ref status_ref;
->>>>>>> Stashed changes
 
     public String getTitle() {
         return title;
