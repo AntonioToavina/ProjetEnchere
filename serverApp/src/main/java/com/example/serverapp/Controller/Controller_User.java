@@ -1,6 +1,5 @@
 package com.example.serverapp.Controller;
 
-import com.example.serverapp.Model.Account_recharge;
 import com.example.serverapp.Model.Token;
 import com.example.serverapp.Model.User_account;
 import com.example.serverapp.Repository.Repo_Rercharge;
@@ -8,7 +7,6 @@ import com.example.serverapp.Repository.Repo_Token;
 import com.example.serverapp.Repository.Repo_User;
 import com.example.serverapp.Util.ResponseData;
 import com.example.serverapp.Util.ResponseError;
-import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,24 +26,20 @@ public class Controller_User {
     @PostMapping("/inscription")
     public Object inscription(@RequestBody User_account user){
         try{
-            this.repo_user.save(user);
+            user.inscription(this.repo_user);
         }catch (Throwable e){
-            e.printStackTrace();
-            return new ResponseError("Erreur lors de l'inscription");
+            return new ResponseError(e.getMessage());
         }
         return new ResponseData("Success");
     }
 
     @PostMapping("/login")
     public Object login (@RequestBody User_account user){
-        Token token =new Token();
+        Token token =null;
         try{
-            user=this.repo_user.userLogin(user.getEmail(),user.getPassword());
-            token.generateToken(user);
-            this.repo_token.save(token);
+            token=user.login(this.repo_user,this.repo_token);
         }catch(Throwable e){
-            e.printStackTrace();
-            return new ResponseError("Mot de passe/email incorrect");
+            return new ResponseError(e.getMessage());
         }
         return new ResponseData(token);
     }
@@ -53,12 +47,10 @@ public class Controller_User {
     @PostMapping("/{iduser}/deconnexion")
     public Object deconnexion(@RequestHeader("Authorization") String token,@PathVariable int iduser){
         try{
-            Token token_user=new Token();
-            token_user=token_user.check_Expiration(token,this.repo_token);
-
-            this.repo_token.deleteToken(iduser);
+            User_account user =new User_account();
+            user.setId(iduser);
+            user.deconnexion(this.repo_token,token);
         }catch(Throwable e){
-            e.printStackTrace();
             return new ResponseError("Error");
         }
         return new ResponseData("Success");

@@ -23,7 +23,15 @@ public class Token {
 
     String token;
 
-    Date expiration_date;
+    Timestamp expiration_date;
+
+    public Timestamp getExpiration_date() {
+        return expiration_date;
+    }
+
+    public void setExpiration_date(Timestamp expiration_date) {
+        this.expiration_date = expiration_date;
+    }
 
     public User_account getUser_account() {
         return user_account;
@@ -41,13 +49,6 @@ public class Token {
         this.token = token;
     }
 
-    public Date getExpiration_date() {
-        return expiration_date;
-    }
-
-    public void setExpiration_date(Date expiration_date) {
-        this.expiration_date = expiration_date;
-    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -74,7 +75,7 @@ public class Token {
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         timestamp.setMinutes(timestamp.getMinutes()+120);
-        this.expiration_date=Date.valueOf(timestamp.toLocalDateTime().toLocalDate());
+        this.expiration_date=timestamp;
     }
 
     public Token check_Expiration(String script, Repo_Token repo){
