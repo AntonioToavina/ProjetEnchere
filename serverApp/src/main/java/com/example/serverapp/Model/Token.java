@@ -14,11 +14,11 @@ import java.sql.Timestamp;
 @Table(name = "token")
 public class Token {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-     @JoinColumn(name = "user_account_id")
+    @JoinColumn(name = "user_account_id")
     User_account user_account;
 
     String token;
