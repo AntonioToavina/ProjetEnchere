@@ -15,7 +15,7 @@ CREATE TABLE user_account (
 CREATE TABLE account_recharge (
     id SERIAL PRIMARY KEY,
     user_account_id INTEGER REFERENCES user_account(id) not null,
-    recharge_amount double precision not null check(recharge_amount>0),
+    recharge_amount double precision not null check(recharge_amount>=0),
     recharge_date date not null default CURRENT_DATE check(recharge_date<=CURRENT_DATE)
 );
 

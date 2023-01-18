@@ -1,14 +1,17 @@
 package com.example.serverapp.Model;
 
+import com.example.serverapp.Repository.Repo_User;
+import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 import java.sql.Date;
 
+@DynamicInsert
 @Entity
 @Table(name = "account_recharge")
 public class Account_recharge {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
@@ -17,6 +20,7 @@ public class Account_recharge {
 
     double recharge_amount;
 
+    @Column(name = "recharge_date")
     Date recharge_date;
 
     public User_account getUser_account() {
