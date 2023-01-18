@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class Auction {
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY )
-    private Long id;
+    private Integer id;
 
     String title;
 
@@ -101,11 +101,11 @@ public class Auction {
         this.status_ref = status_ref;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 }
