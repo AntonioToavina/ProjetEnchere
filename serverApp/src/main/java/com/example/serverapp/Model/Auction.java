@@ -1,13 +1,17 @@
 package com.example.serverapp.Model;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@DynamicInsert
 @Entity
 @Table(name = "auction")
 public class Auction {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy =GenerationType.IDENTITY )
     private Long id;
 
     String title;
@@ -30,7 +34,19 @@ public class Auction {
 
     @OneToOne
     @JoinColumn(name = "status_ref_id",referencedColumnName = "id")
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
      Status_ref status_ref;
+=======
+    Status_ref status_ref;
+>>>>>>> Stashed changes
+=======
+    Status_ref status_ref;
+>>>>>>> Stashed changes
+=======
+    Status_ref status_ref;
+>>>>>>> Stashed changes
 
     public String getTitle() {
         return title;
