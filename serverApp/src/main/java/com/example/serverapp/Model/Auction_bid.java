@@ -85,6 +85,11 @@ public class Auction_bid {
             if(v.getId().equals(getUser_account().getId()))
                 return false;
 
+            if(v.getAuction_bid()!=null){
+                if(v.getAuction_bid().getUser_account().getId().equals(getUser_account().getId()))
+                    return false;
+            }
+
             if(v.getStatus().equals("in progress")){
 
                 if(checkBid_amount(v)){
