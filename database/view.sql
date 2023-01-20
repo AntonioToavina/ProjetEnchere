@@ -28,3 +28,15 @@ SELECT b.* from auction_bid b join v_auction a on b.id=a.auction_bid_id
 
 CREATE OR REPLACE VIEW v_amountuseraccount_available AS
 SELECT v.user_account_id,v.amount,v.amount-(SELECT sum(bid_amount) from v_blocked_accountamount where user_account_id=v.user_account_id) amount_available from v_amountuseraccount v
+
+
+-- bid amount from auction sold group by category // calculer la marge depuis mongo
+CREATE OR REPLACE VIEW v_statistique_categorie AS
+SELECT au.category_id,sum(b.bid_amount) bid_amount from auction au join v_auction a on au.id=a.auction_id
+join auction_bid b on a.auction_id=b.auction_id where status='sold' group by au.category_id ;
+
+
+CREATE OR REPLACE VIEW v_statistique_user AS
+SELECT au.user_account_id,sum(b.bid_amount) bid_amount from auction au join v_auction a on au.id=a.auction_id
+join auction_bid b on a.auction_id=b.auction_id where status='sold' group by au.user_account_id ;
+

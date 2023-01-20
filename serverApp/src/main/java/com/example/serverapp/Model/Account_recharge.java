@@ -59,7 +59,7 @@ public class Account_recharge {
     public String toString() {
         return "Account_recharge{" +
                 "id=" + id +
-                ", user_account=" + user_account +
+                ", category=" + user_account +
                 ", recharge_amount=" + recharge_amount +
                 ", recharge_date=" + recharge_date +
                 '}';
