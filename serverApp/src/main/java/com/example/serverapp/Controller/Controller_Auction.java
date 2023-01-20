@@ -51,11 +51,14 @@ public class Controller_Auction {
     }
 
     @PostMapping()
-    public Object create(@RequestHeader("Authorization") String token,@RequestBody Auction auction){
+    public Object create(@RequestHeader("Authorization") String token,@RequestBody Auction auction, @RequestParam int min_duration,@RequestParam int max_duration){
         try{
             Token t=new Token().check_Expiration(token,getRepo_token());
             if(t==null)
                 return new ResponseError("Access denied");
+
+            if(auction.getDuration()<min_duration || auction.getDuration()>max_duration)
+                return new ResponseError("Duration should be between: "+min_duration+" and "+max_duration);
 
             getRepo_auction().save(auction);
         }catch (Throwable e){
@@ -66,9 +69,6 @@ public class Controller_Auction {
     @GetMapping()
     public Object findAll(){
         try{
-//            Token t=new Token().check_Expiration(token,getRepo_token());
-//            if(t==null)
-//                return new ResponseError("Access denied");
 
             return  new ResponseData(getRepo_v_auction().findAll());
         }catch (Throwable e){
