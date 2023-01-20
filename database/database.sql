@@ -31,12 +31,6 @@ CREATE TABLE category(
     category_name VARCHAR(80) UNIQUE not null
 );
 
-CREATE TABLE status_ref(
-  id SERIAL PRIMARY KEY,
-  status_name VARCHAR(80) UNIQUE NOT NULL,
-  status_value smallint UNIQUE not null
-);
-
 -- CREATE TABLE auction_duration(
 --   id SERIAL PRIMARY KEY,
 --   min_duration smallint not null check(min_duration>=0),
@@ -60,8 +54,7 @@ CREATE TABLE auction(
   start_date TIMESTAMP not null default CURRENT_TIMESTAMP,
   duration decimal not null check(duration>0),
   category_id INTEGER REFERENCES category(id) not null,
-  user_account_id INTEGER REFERENCES user_account(id) not null,
-  status_ref_id INTEGER REFERENCES status_ref(id) not null
+  user_account_id INTEGER REFERENCES user_account(id) not null
 
 );
 

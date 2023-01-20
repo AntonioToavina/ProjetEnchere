@@ -24,10 +24,10 @@ where id in (SELECT account_recharge_id from account_recharge_validation where s
 group by u.id;
 
 CREATE OR REPLACE VIEW v_blocked_accountamount AS
-SELECT b.* from auction_bid b join v_auction a on b.id=a.auction_bid_id
+SELECT b.* from auction_bid b join v_auction a on b.id=a.auction_bid_id;
 
 CREATE OR REPLACE VIEW v_amountuseraccount_available AS
-SELECT v.user_account_id,v.amount,v.amount-(SELECT sum(bid_amount) from v_blocked_accountamount where user_account_id=v.user_account_id) amount_available from v_amountuseraccount v
+SELECT v.user_account_id,v.amount,v.amount-(SELECT sum(bid_amount) from v_blocked_accountamount where user_account_id=v.user_account_id) amount_available from v_amountuseraccount v;
 
 
 -- bid amount from auction sold group by category // calculer la marge depuis mongo
