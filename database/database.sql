@@ -99,7 +99,8 @@ CREATE TABLE admin (
 CREATE TABLE account_recharge_validation(
   id SERIAL PRIMARY KEY,
   account_recharge_id INTEGER REFERENCES account_recharge(id) UNIQUE not null,
-  admin_id INTEGER REFERENCES admin(id) UNIQUE not null,
+  admin_id INTEGER REFERENCES admin(id) not null,
   status smallint not null default 5
 );
 
+-- ALTER TABLE account_recharge_validation DROP CONSTRAINT account_recharge_validation_admin_id_key

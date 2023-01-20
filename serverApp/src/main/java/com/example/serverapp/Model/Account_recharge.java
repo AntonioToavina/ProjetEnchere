@@ -54,4 +54,14 @@ public class Account_recharge {
     public Integer getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Account_recharge{" +
+                "id=" + id +
+                ", user_account=" + user_account +
+                ", recharge_amount=" + recharge_amount +
+                ", recharge_date=" + recharge_date +
+                '}';
+    }
 }
