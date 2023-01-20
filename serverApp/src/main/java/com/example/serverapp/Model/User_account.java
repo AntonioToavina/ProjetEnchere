@@ -3,7 +3,6 @@ package com.example.serverapp.Model;
 import com.example.serverapp.Repository.Repo_Token;
 import com.example.serverapp.Repository.Repo_User;
 import org.hibernate.annotations.DynamicInsert;
-
 import javax.persistence.*;
 
 @DynamicInsert
