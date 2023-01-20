@@ -76,4 +76,21 @@ public class Controller_Auction {
         }
     }
 
+
+    @GetMapping("/users/{id}")
+    public Object findByUserid(@RequestHeader("Authorization") String token, @PathVariable int id){
+        try{
+            Token t=new Token().check_Expiration(token,getRepo_token());
+            if(t==null)
+                return new ResponseError("Access denied");
+
+
+            return  new ResponseData(getRepo_v_auction().findByUserAccountId(id));
+        }catch (Throwable e){
+            return new ResponseError(e.getMessage());
+        }
+    }
+
+
+
 }
