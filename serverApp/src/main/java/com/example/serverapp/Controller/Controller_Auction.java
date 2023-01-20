@@ -20,47 +20,25 @@ public class Controller_Auction {
 
     Repo_v_auction repo_v_auction;
 
-    public Repo_v_auction getRepo_v_auction() {
-        return repo_v_auction;
-    }
 
-    public void setRepo_v_auction(Repo_v_auction repo_v_auction) {
-        this.repo_v_auction = repo_v_auction;
-    }
-
-    public Repo_Token getRepo_token() {
-        return repo_token;
-    }
-
-    public void setRepo_token(Repo_Token repo_token) {
-        this.repo_token = repo_token;
-    }
-
-    public Repo_auction getRepo_auction() {
-        return repo_auction;
-    }
-
-    public void setRepo_auction(Repo_auction repo_auction) {
-        this.repo_auction = repo_auction;
-    }
 
     public Controller_Auction(Repo_auction repo_auction,Repo_Token repo_token,Repo_v_auction repo_v_auction) {
-        setRepo_auction(repo_auction);
-        setRepo_token(repo_token);
-        setRepo_v_auction(repo_v_auction);
+        this.repo_auction=repo_auction;
+       this.repo_token=repo_token;
+       this.repo_v_auction=repo_v_auction;
     }
 
     @PostMapping()
     public Object create(@RequestHeader("Authorization") String token,@RequestBody Auction auction, @RequestParam int min_duration,@RequestParam int max_duration){
         try{
-            Token t=new Token().check_Expiration(token,getRepo_token());
+            Token t=new Token().check_Expiration(token,this.repo_token);
+            System.out.println("atooo");
             if(t==null)
                 return new ResponseError("Access denied");
-
             if(auction.getDuration()<min_duration || auction.getDuration()>max_duration)
                 return new ResponseError("Duration should be between: "+min_duration+" and "+max_duration);
 
-            getRepo_auction().save(auction);
+           this.repo_auction.save(auction);
         }catch (Throwable e){
             return new ResponseError(e.getMessage());
         }
@@ -70,7 +48,7 @@ public class Controller_Auction {
     public Object findAll(){
         try{
 
-            return  new ResponseData(getRepo_v_auction().findAll());
+            return  new ResponseData(this.repo_v_auction.findAll());
         }catch (Throwable e){
             return new ResponseError(e.getMessage());
         }
@@ -80,12 +58,12 @@ public class Controller_Auction {
     @GetMapping("/users/{id}")
     public Object findByUserid(@RequestHeader("Authorization") String token, @PathVariable int id){
         try{
-            Token t=new Token().check_Expiration(token,getRepo_token());
+            Token t=new Token().check_Expiration(token,this.repo_token);
             if(t==null)
                 return new ResponseError("Access denied");
 
 
-            return  new ResponseData(getRepo_v_auction().findByUserAccountId(id));
+            return  new ResponseData(this.repo_v_auction.findByUserAccountId(id));
         }catch (Throwable e){
             return new ResponseError(e.getMessage());
         }

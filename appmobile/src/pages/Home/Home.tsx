@@ -3,12 +3,14 @@ import { Box, Grid } from "@mui/material";
 import AuthBackground from "../../assets/images/auth/AuthBackground";
 import Logo from "../../components/Logo/Logo";
 import MainCard from "../../components/MainCard";
+import Menu from "../Menu/Menu";
 import FieldNewEnchere from "./FieldNewEnchere";
 
 const Home: React.FC = () => {
   return (
     <>
-      <IonPage>
+      <Menu />
+      <IonPage id="main-content">
         <Grid item xs={12}>
           <AuthBackground></AuthBackground>
           <Grid xs={12} container justifyContent="center" alignItems="center">

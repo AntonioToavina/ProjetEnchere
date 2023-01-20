@@ -29,15 +29,15 @@ public class Auction {
 
     User_account user_account;
 
-    List<Image> images;
+    String[] images;
 
 
 
-    public List<Image> getImages() {
+    public String[] getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(String[] images) {
         this.images = images;
     }
 

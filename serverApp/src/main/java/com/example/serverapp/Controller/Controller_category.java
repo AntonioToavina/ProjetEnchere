@@ -30,7 +30,6 @@ public class Controller_category {
     @GetMapping()
     public Object findAll(){
         try{
-
             return  new ResponseData(getRepo_category().findAll());
         }catch (Throwable e){
             return new ResponseError(e.getMessage());

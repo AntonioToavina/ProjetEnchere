@@ -24,8 +24,6 @@ public class Auction_controller {
 
     @PostMapping()
     public Object create( @RequestBody Auction auction){
-
-
         auction_repo.save(auction);
         return new ResponseData("auction inserted sucessfully");
     }
@@ -40,7 +38,7 @@ public class Auction_controller {
     public Object addImage(@PathVariable Integer id,@RequestParam String url){
         Optional<Auction> auction = auction_repo.findById(id);
         if(auction.isPresent()){
-            auction.get().getImages().add(new Image(url));
+           // auction.get().getImages().add(url);
             auction_repo.save(auction.get());
             return new ResponseData("image added successfully");
         }

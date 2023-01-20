@@ -1,7 +1,7 @@
 package mongo.mongoserverapp.model;
 
 public class Image {
-    String image_url;
+        String image_url;
 
     public String getImage_url() {
         return image_url;

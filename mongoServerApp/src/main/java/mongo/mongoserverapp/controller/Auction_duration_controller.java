@@ -21,18 +21,12 @@ public class Auction_duration_controller {
 
     @PostMapping()
     public Object create( @RequestBody Auction_duration auction_duration){
-
-
         auction_duration_repo.save(auction_duration);
         return new ResponseData("auction_duration updated sucessfully");
     }
 
-
-
     @GetMapping("/last")
     public Object findLast(){
-
-
         List<Auction_duration> auction_durations=auction_duration_repo.findByOrderByModifiedDateDesc();
         if(auction_durations.size()>0)
             return new ResponseData(auction_durations.get(0));
