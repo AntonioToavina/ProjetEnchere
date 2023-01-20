@@ -16,7 +16,6 @@ import java.util.Optional;
 @RequestMapping("/auctions")
 public class Auction_controller {
 
-    @Autowired
     Auction_repo auction_repo;
 
     public Auction_controller(Auction_repo auction_repo) {
