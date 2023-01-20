@@ -70,8 +70,11 @@ public class Auction_bid {
     }
 
     public boolean checkBid_amount(V_auction auction){
-        if(auction.getAuction_bid()==null)
-            return true;
+        if(auction.getAuction_bid()==null){
+
+            if(auction.getAuction().getMin_price()<getBid_amount())
+                return true;
+        }
         else if(getBid_amount()>auction.getAuction_bid().getBid_amount())
             return true;
         return false;
@@ -116,7 +119,7 @@ public class Auction_bid {
         if(checkAuction(auction,repo_v_auction,repo_v_amountuseraccount_available)){
             repo_auction_bid.save(this);
         }else{
-            throw new Exception("Impossible d'encherir sur cette enchère");
+            throw new Exception("Mise en enchère invalide");
         }
     }
 }
