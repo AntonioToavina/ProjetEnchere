@@ -34,7 +34,7 @@ db.auction.insertOne({
 db.auction_duration.insertOne({
   min_duration: 12,
   max_duration: 72,
-  modified_date: "2022-01-01",
+  modified_date: ISODate("2022-10-10T00:00:00.000Z"),
 });
 
 db.auction_commission.insertMany([
