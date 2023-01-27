@@ -40,7 +40,19 @@ public class Auction_controller {
     public Object addImage(@PathVariable Integer id,@RequestParam String url){
         Optional<Auction> auction = auction_repo.findById(id);
         if(auction.isPresent()){
-            auction.get().getImages().add(new Image(url));
+           // auction.get().getImages().add(url);
+            String[] images=auction.get().getImages();
+            String[] newImages=new String[images.length+1];
+
+            int i=0;
+            for (String img :
+                    images) {
+                newImages[i]=img;
+                i++;
+            }
+            newImages[i]=url;
+
+            auction.get().setImages(newImages);
             auction_repo.save(auction.get());
             return new ResponseData("image added successfully");
         }
