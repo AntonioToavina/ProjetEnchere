@@ -64,11 +64,11 @@ public class Controller_Auction {
         return new ResponseData("Success");
     }
     @GetMapping()
-    public Object findAll(){
+    public Object findAll(@RequestHeader("Authorization") String token){
         try{
-//            Token t=new Token().check_Expiration(token,getRepo_token());
-//            if(t==null)
-//                return new ResponseError("Access denied");
+            Token t=new Token().check_Expiration(token,getRepo_token());
+            if(t==null)
+                return new ResponseError("Access denied");
 
             return  new ResponseData(getRepo_v_auction().findAll());
         }catch (Throwable e){

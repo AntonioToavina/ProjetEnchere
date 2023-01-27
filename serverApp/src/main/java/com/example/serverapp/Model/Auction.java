@@ -32,10 +32,6 @@ public class Auction {
     @JoinColumn(name = "user_account_id")
     User_account user_account;
 
-    @OneToOne
-    @JoinColumn(name = "status_ref_id",referencedColumnName = "id")
-    
-    Status_ref status_ref;
 
     public String getTitle() {
         return title;
@@ -91,14 +87,6 @@ public class Auction {
 
     public void setUser_account(User_account user_account) {
         this.user_account = user_account;
-    }
-
-    public Status_ref getStatus_ref() {
-        return status_ref;
-    }
-
-    public void setStatus_ref(Status_ref status_ref) {
-        this.status_ref = status_ref;
     }
 
     public void setId(Integer id) {
