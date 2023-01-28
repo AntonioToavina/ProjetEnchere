@@ -1,17 +1,12 @@
 package mongo.mongoserverapp.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 @Document("auction")
 public class Auction {
 
-    @Id
     private Integer id;
 
     String title;
@@ -20,7 +15,7 @@ public class Auction {
 
     double min_price;
 
-    @JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     Date start_date;
 
     double duration;
@@ -30,7 +25,6 @@ public class Auction {
     User_account user_account;
 
     String[] images;
-
 
 
     public String[] getImages() {

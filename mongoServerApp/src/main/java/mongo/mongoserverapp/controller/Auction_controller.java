@@ -3,21 +3,15 @@ package mongo.mongoserverapp.controller;
 import mongo.mongoserverapp.Util.ResponseData;
 import mongo.mongoserverapp.Util.ResponseError;
 import mongo.mongoserverapp.model.Auction;
-import mongo.mongoserverapp.model.Image;
-import org.bson.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import mongo.mongoserverapp.repo.Auction_repo;
-
 import java.util.Optional;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/auctions")
 public class Auction_controller {
-
     Auction_repo auction_repo;
-
     public Auction_controller(Auction_repo auction_repo) {
         this.auction_repo = auction_repo;
     }

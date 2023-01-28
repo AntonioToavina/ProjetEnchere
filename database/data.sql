@@ -10,9 +10,9 @@ INSERT INTO category (id,category_name) VALUES (1,'Electronics');
 INSERT INTO category (id,category_name) VALUES (2,'Furniture');
 INSERT INTO category (id,category_name) VALUES (3,'Clothes');
 
-INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id, status_ref_id) VALUES ('Laptop', 'Used laptop in good condition', 250.00, NOW(), 24, 1, 1, 1);
-INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id, status_ref_id) VALUES ('Sofa', 'Brand new sofa with warranty', 500.00, NOW(), 48, 2, 2, 1);
-INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id, status_ref_id) VALUES ('Shirt', 'Designer shirt', 50.00, NOW(), 12, 3, 3, 1);
+INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id) VALUES ('Laptop', 'Used laptop in good condition', 250.00, NOW(), 24, 1, 1);
+INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id) VALUES ('Sofa', 'Brand new sofa with warranty', 500.00, NOW(), 48, 2, 2);
+INSERT INTO auction (title, description, min_price, start_date, duration, category_id, user_account_id) VALUES ('Shirt', 'Designer shirt', 50.00, NOW(), 12, 3, 3);
 
 INSERT INTO auction_bid (user_account_id, auction_id, bid_amount) VALUES (1, 1, 300.00);
 INSERT INTO auction_bid (user_account_id, auction_id, bid_amount) VALUES (2, 2, 550.00);

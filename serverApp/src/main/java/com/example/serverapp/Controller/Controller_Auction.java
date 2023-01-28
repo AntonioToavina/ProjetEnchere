@@ -2,13 +2,15 @@ package com.example.serverapp.Controller;
 
 import com.example.serverapp.Model.Auction;
 import com.example.serverapp.Model.Token;
-import com.example.serverapp.Model.User_account;
 import com.example.serverapp.Repository.Repo_Token;
 import com.example.serverapp.Repository.Repo_auction;
 import com.example.serverapp.Repository.Repo_v_auction;
 import com.example.serverapp.Util.ResponseData;
 import com.example.serverapp.Util.ResponseError;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @RestController
 @CrossOrigin
@@ -38,16 +40,16 @@ public class Controller_Auction {
             if(auction.getDuration()<min_duration || auction.getDuration()>max_duration)
                 return new ResponseError("Duration should be between: "+min_duration+" and "+max_duration);
 
+            auction.setStart_date(Timestamp.valueOf(LocalDateTime.now()));
            this.repo_auction.save(auction);
         }catch (Throwable e){
             return new ResponseError(e.getMessage());
         }
-        return new ResponseData("Success");
+        return new ResponseData(auction);
     }
     @GetMapping()
     public Object findAll(){
         try{
-
             return  new ResponseData(this.repo_v_auction.findAll());
         }catch (Throwable e){
             return new ResponseError(e.getMessage());

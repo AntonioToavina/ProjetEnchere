@@ -31,6 +31,8 @@ CREATE TABLE category(
     category_name VARCHAR(80) UNIQUE not null
 );
 
+
+
 -- CREATE TABLE auction_duration(
 --   id SERIAL PRIMARY KEY,
 --   min_duration smallint not null check(min_duration>=0),
@@ -55,7 +57,6 @@ CREATE TABLE auction(
   duration decimal not null check(duration>0),
   category_id INTEGER REFERENCES category(id) not null,
   user_account_id INTEGER REFERENCES user_account(id) not null
-
 );
 
 -- CREATE TABLE auction_image(

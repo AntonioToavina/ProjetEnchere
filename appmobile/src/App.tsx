@@ -23,6 +23,7 @@ import "./theme/variables.css";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
 import Home from "./pages/Home/Home";
+import BodyAccount from "./pages/Home/BodyAccount";
 
 setupIonicReact();
 
@@ -37,6 +38,9 @@ const App: React.FC = () => (
       </Route>
       <Route exact path="/home">
         <Home />
+      </Route>
+      <Route exact path="/account">
+        <BodyAccount />
       </Route>
     </IonReactRouter>
   </IonApp>

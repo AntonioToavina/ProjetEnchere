@@ -34,8 +34,9 @@ const AuthLogin = () => {
         if ("error" in json) {
           alert(json.error);
         } else {
+          console.log(json.data);
           sessionStorage.setItem("user", JSON.stringify(json.data));
-          alert(json.data);
+          alert("Success");
           history.push("/home");
         }
       });

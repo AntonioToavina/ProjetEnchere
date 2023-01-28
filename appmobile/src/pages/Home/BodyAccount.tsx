@@ -1,19 +1,19 @@
 import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonMenuButton,
   IonPage,
-  IonTitle,
+  IonHeader,
   IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
 } from "@ionic/react";
 import { Box, Grid } from "@mui/material";
 import AuthBackground from "../../assets/images/auth/AuthBackground";
 import MainCard from "../../components/MainCard";
 import Menu from "../Menu/Menu";
-import FieldNewEnchere from "./FieldNewEnchere";
+import Account from "./Account";
 
-const Home: React.FC = () => {
+const BodyAccount: React.FC = () => {
   return (
     <>
       <Menu />
@@ -60,7 +60,7 @@ const Home: React.FC = () => {
                   others={undefined}
                 >
                   <Box sx={{ p: { xs: 2, sm: 3, md: 4, xl: 5 } }}>
-                    <FieldNewEnchere />
+                    <Account />
                   </Box>
                 </MainCard>
               </Grid>
@@ -72,4 +72,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default BodyAccount;

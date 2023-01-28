@@ -1,3 +1,4 @@
+import { IonImg } from "@ionic/react";
 import {
   Button,
   FormControl,
@@ -9,10 +10,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { string } from "prop-types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router";
 import AnimateButton from "../../components/@extended/AnimateButton";
-import { Auction } from "../../Model/Auction";
 import Picture from "./Picture";
 
 interface Container {
@@ -21,23 +21,17 @@ interface Container {
 }
 
 const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
-  const auction = new Auction();
   const [title, setTitle] = useState<any>();
   const [description, setDescription] = useState<any>();
   const [min_price, setMin_price] = useState<any>();
   const [duration, setDuration] = useState<any>();
   const [categorie, setCategorie] = useState<any>();
-
   const [picture, setPicture] = useState<any[]>([]);
+
+  const history = useHistory();
   let user = JSON.parse(sessionStorage.getItem("user") || "{}");
 
-  useEffect(() => {
-    if (picture.length != 0) alert("Votre image a ete pris en compte");
-  }, [picture]);
-
   const sendEnchere_Postgresql = async () => {
-    console.log(auction.duration);
-
     var content = {
       method: "POST",
       headers: {
@@ -46,7 +40,6 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
       },
       body: "",
     };
-    auction.user_account = user;
     content.body = JSON.stringify({
       title: title,
       description: description,
@@ -54,10 +47,11 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
       duration: duration,
       category: {
         id: categorie,
+        category_name: listCategory.filter(
+          (e) => e.id === parseInt(categorie)
+        )[0].category_name,
       },
-      user_account: {
-        id: user.user_account.id,
-      },
+      user_account: user.user_account,
     });
     content.headers.Authorization = "Bearer " + user.token;
     fetch(
@@ -71,12 +65,12 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
       .then((json) => {
         if ("error" in json) alert(json.error);
         else {
-          alert(json.data);
+          sendEnchere_MongoDB(json.data);
         }
       });
   };
 
-  const sendEnchere_MongoDB = () => {
+  const sendEnchere_MongoDB = (data: any) => {
     var content = {
       method: "POST",
       headers: {
@@ -85,53 +79,34 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
       body: "",
     };
 
-    content.body = JSON.stringify({
-      title: title,
-      description: description,
-      min_price: min_price,
-      duration: duration,
-      category: {
-        id: categorie,
-        category_name: listCategory.filter(
-          (e) => e.id === parseInt(categorie)
-        )[0].category_name,
-      },
-      user_account: {
-        id: user.user_account.id,
-        userkey: user.user_account.userkey,
-        username: user.user_account.username,
-        email: user.user_account.email,
-        password: user.user_account.password,
-      },
-      images: picture,
-    });
-    console.log(content.body);
+    data.images = picture;
+    content.body = JSON.stringify(data);
 
     fetch("http://localhost:8081/auctions", content)
       .then((response) => response.json())
       .then((json) => {
         if ("error" in json) alert(json.error);
         else {
-          console.log(json.data);
+          alert("Succes");
+          history.push("/home");
         }
       });
   };
 
   const handleClick = async () => {
     sendEnchere_Postgresql();
-    sendEnchere_MongoDB();
   };
 
   return (
     <>
       <Grid container alignItems="center" justifyContent="space-between">
-        <Grid item>
+        <Grid item={true}>
           <Typography variant="h5">Creation enchere</Typography>
         </Grid>
-        <Grid item />
+        <Grid />
       </Grid>
-      <Grid container spacing={6}>
-        <Grid item xs={6} lg={4}>
+      <Grid container spacing={6}>  
+        <Grid item={true} xs={6} lg={4}>
           <Stack spacing={1}>
             <InputLabel htmlFor="firstname-signup">Titre</InputLabel>
             <OutlinedInput
@@ -142,7 +117,7 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
             />
           </Stack>
         </Grid>
-        <Grid item xs={6} lg={4}>
+        <Grid item={true} xs={6} lg={4}>
           <Stack spacing={1}>
             <InputLabel htmlFor="firstname-signup">Description</InputLabel>
             <OutlinedInput
@@ -153,11 +128,12 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
             />
           </Stack>
         </Grid>
-        <Grid item xs={6} md={1}>
+        <Grid item={true} xs={6} md={1}>
           <Stack spacing={1}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Category</InputLabel>
               <Select
+                defaultValue={""}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Age"
@@ -172,7 +148,7 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
             </FormControl>
           </Stack>
         </Grid>
-        <Grid item xs={6} md={1}>
+        <Grid item={true} xs={6} md={1}>
           <Stack spacing={1}>
             <InputLabel htmlFor="lastname-signup">Prix mise Enchere</InputLabel>
             <OutlinedInput
@@ -183,7 +159,7 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
             />
           </Stack>
         </Grid>
-        <Grid item xs={6} md={1}>
+        <Grid item={true} xs={6} md={1}>
           <Stack spacing={1}>
             <InputLabel htmlFor="lastname-signup">Duree</InputLabel>
             <OutlinedInput
@@ -195,14 +171,14 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
           </Stack>
         </Grid>
 
-        <Grid item xs={6} md={1}>
+        <Grid item={true} xs={6} md={1}>
           <Stack spacing={1}>
             <InputLabel htmlFor="lastname-signup">Importer photo</InputLabel>
             <Picture setPictures={setPicture} pictures={picture} />
           </Stack>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item={true} xs={6} md={1}>
           <AnimateButton type={undefined}>
             <Button
               fullWidth
@@ -212,10 +188,20 @@ const Field: React.FC<Container> = ({ listCategory, listAuctionDuration }) => {
               color="primary"
               onClick={handleClick}
             >
-              Search
+              Creer
             </Button>
           </AnimateButton>
         </Grid>
+        <Grid item={true} xs={6} md={1}></Grid>
+
+        {picture.map((picture, index) => (
+          <Grid item={true} xs={6} key={index}>
+            <IonImg
+              style={{ border: "1px solid black", minHeight: "100px" }}
+              src={"data:image/png;base64," + picture}
+            ></IonImg>
+          </Grid>
+        ))}
       </Grid>
     </>
   );

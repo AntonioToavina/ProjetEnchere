@@ -54,7 +54,7 @@ const FieldNewEnchere = () => {
   return (
     <>
       <Grid container>
-        <Grid xs={12}>
+        <Grid item={true} xs={12}>
           <Field
             listCategory={listCategory}
             listAuctionDuration={auctionDuration}
